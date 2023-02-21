@@ -1,56 +1,62 @@
-name: Linters
+# Set up a "Hello Microverse" project
 
-on: pull_request
+## Learning Objectives
 
-env:
-  FORCE_COLOR: 1
+- Create branches with different base branches.
+- Understand the concept of version control.
+- Follow GitHub flow.
+- Open pull requests in GitHub.
+- Write descriptive, easy to understand commit messages.
+- Write short, detailed, easy to understand descriptions of pull requests.
+- Write a descriptive and easy to understand README in business English for every project submitted.
+- Demonstrate an ability to submit a project for code review.
 
-jobs:
-  lighthouse:
-    name: Lighthouse
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "18.x"
-      - name: Setup Lighthouse
-        run: npm install -g @lhci/cli@0.7.x
-      - name: Lighthouse Report
-        run: lhci autorun --upload.target=temporary-public-storage --collect.staticDistDir=.
-  webhint:
-    name: Webhint
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "18.x"
-      - name: Setup Webhint
-        run: |
-          npm install --save-dev hint@7.x
-          [ -f .hintrc ] || wget https://raw.githubusercontent.com/microverseinc/linters-config/master/html-css/.hintrc
-      - name: Webhint Report
-        run: npx hint .
-  stylelint:
-    name: Stylelint
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "18.x"
-      - name: Setup Stylelint
-        run: |
-          npm install --save-dev stylelint@13.x stylelint-scss@3.x stylelint-config-standard@21.x stylelint-csstree-validator@1.x
-          [ -f .stylelintrc.json ] || wget https://raw.githubusercontent.com/microverseinc/linters-config/master/html-css/.stylelintrc.json
-      - name: Stylelint Report
-        run: npx stylelint "**/*.{css,scss}"
-  nodechecker:
-    name: node_modules checker
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Check node_modules existence
-        run: |
-          if [ -d "node_modules/" ]; then echo -e "\e[1;31mThe node_modules/ folder was pushed to the repo. Please remove it from the GitHub repository and try again."; echo -e "\e[1;32mYou can set up a .gitignore file with this folder included on it to prevent this from happening in the future." && exit 1; fi
+### Estimated time: 0.5h
+
+## Description
+
+In this project, you will set up a "Hello world" repository. No complex coding is required for this exercise. 
+Your goal here is to master all of the tools and best practices you learned about in previous steps.
+You will be using them in all Microverse projects and most likely in your future job as well, so it is important to know them!
+
+IMPORTANT NOTE: Read **all** requirements before you start building your project.*
+
+### General requirements
+
+Once you finish your project, double-check to make sure your repo is ready:
+
+- Make sure that there are [no linter errors](https://github.com/microverseinc/linters-config).
+- Make sure that you used correct ([GitHub flow](https://github.com/microverseinc/curriculum-transversal-skills/blob/main/git-github/articles/github_flow.md)).
+- Make sure that you documented your work.
+
+### Requirements
+
+- Remember to document your work [in a professional way](https://github.com/microverseinc/curriculum-transversal-skills/blob/main/documentation/articles/professional_repo_rules.md).
+- Create a new GitHub repo.
+- Create a new branch according to the [GitHub flow](https://github.com/microverseinc/curriculum-transversal-skills/blob/main/git-github/articles/github_flow.md) rules.
+- Add a `.gitignore` file.
+- Add `node_modules` to gitignore file.
+- Set up [a linter for HTML and CSS](https://github.com/microverseinc/linters-config) and make sure that any files that are not relevant are ignored by git.
+- Add descriptive README file to your project - please use [this template](https://github.com/microverseinc/readme-template) but remember to customize it to your project.
+- Add 3 files (each one in a separate commit):
+    - A .html file that includes a header with the text "Hello Microverse!". Use `h1` tag for that.
+    - A .css file that includes one class with styles for your header (make it in your favorite color).
+    - A test.md file with the text "This file should be ignored by git".
+- Make sure that the last file is actually ignored by git and is not present in your GitHub repository.
+- Open a pull request.
+
+## Code review
+
+Follow [these steps](https://github.com/microverseinc/curriculum-transversal-skills/blob/main/code-review/articles/how_to_ask_for_a_code_review.md) to request a code review of your project.
+
+**You will learn more about the code review process in upcoming lessons. For now, it is enough if you follow those steps.**
+
+## Submit your project
+
+After receiving final approval from a Code Reviewer, you need to submit your project.
+[Read this FAQ for a reminder on how to submit your project.](https://microverse.zendesk.com/hc/en-us/articles/360061344234)
+Now go to your Student Dashboard and submit your project.
+
+------
+
+_If you spot any bugs or issues in this activity, you can [open an issue with your proposed change](https://github.com/microverseinc/curriculum-transversal-skills/blob/main/git-github/articles/open_issue.md)._
